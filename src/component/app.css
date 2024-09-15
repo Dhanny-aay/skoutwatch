@@ -1,0 +1,26 @@
+/* styles.css */
+.uploader-container {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.dropzone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropzone.active {
+  border-color: #4a90e2;
+}
+
+.video-player {
+  margin-top: 20px;
+}
+
+.frame-thumbnail {
+  width: 120px;
+  margin-right: 10px;
+  cursor: pointer;
+}
