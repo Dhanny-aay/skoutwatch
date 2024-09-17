@@ -1,12 +1,11 @@
-// CanvasFrame.js
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 
 const CanvasFrame = ({
   videoSrc,
   time,
   videoWidth,
   videoHeight,
-  onExtractFrame,
+  onFrameExtracted,
 }) => {
   const canvasRef = useRef(null);
 
@@ -20,12 +19,10 @@ const CanvasFrame = ({
       const ctx = canvas.getContext("2d");
       ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
 
-      // Extract frame as a blob for sending to SAM 2
-      canvas.toBlob((blob) => {
-        onExtractFrame(blob); // Pass extracted frame to parent
-      });
+      // Call callback with the canvas reference for use in ObjectSelector
+      if (onFrameExtracted) onFrameExtracted(canvasRef);
     };
-  }, [time, videoSrc, videoWidth, videoHeight, onExtractFrame]);
+  }, [time, videoSrc, videoWidth, videoHeight]);
 
   return (
     <canvas ref={canvasRef} width={videoWidth} height={videoHeight}></canvas>

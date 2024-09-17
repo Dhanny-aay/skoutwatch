@@ -1,4 +1,3 @@
-// Prototype.js
 import { useState } from "react";
 import VideoUpload from "../component/videoUpload";
 import VideoPlayer from "../component/videoPlayer";
@@ -8,20 +7,20 @@ import ObjectSelector from "../component/objectSelector";
 const Prototype = () => {
   const [videoSrc, setVideoSrc] = useState(null);
   const [pausedFrame, setPausedFrame] = useState(null);
-  const [extractedFrame, setExtractedFrame] = useState(null); // Store the extracted frame
+  const [canvasRef, setCanvasRef] = useState(null);
 
   const handleVideoSelect = (videoUrl) => setVideoSrc(videoUrl);
 
-  const handlePauseFrame = (time) => {
-    setPausedFrame({ time });
+  const handlePauseFrame = (time, width, height) => {
+    setPausedFrame({ time, width, height });
   };
 
-  const handleExtractedFrame = (frameBlob) => {
-    setExtractedFrame(frameBlob); // Store extracted frame
+  const handleFrameExtracted = (ref) => {
+    setCanvasRef(ref);
   };
 
   return (
-    <div className="w-full flex flex-row space-x-16 p-12 justify-start items-start">
+    <div className="relative w-full p-12 flex  flex-col space-y-12 md:space-y-0 md:flex-row space-x-16">
       <VideoUpload onVideoSelect={handleVideoSelect} />
       <div>
         {videoSrc && (
@@ -35,15 +34,14 @@ const Prototype = () => {
               time={pausedFrame.time}
               videoWidth={600}
               videoHeight={300}
-              onExtractFrame={handleExtractedFrame} // Extract frame for SAM 2
+              onFrameExtracted={handleFrameExtracted}
             />
-
             {/* Object selector for drawing bounding box */}
-            {extractedFrame && (
+            {canvasRef && (
               <ObjectSelector
                 videoWidth={600}
                 videoHeight={300}
-                extractedFrame={extractedFrame} // Pass frame to ObjectSelector
+                canvasRef={canvasRef}
               />
             )}
           </div>
