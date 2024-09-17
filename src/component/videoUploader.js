@@ -42,7 +42,7 @@ const VideoUploader = () => {
     const videoArrayBuffer = await videoFile.arrayBuffer();
     await ffmpeg.writeFile("input.mp4", new Uint8Array(videoArrayBuffer));
 
-    // Extract a frame every 2 seconds (fps = 1 frame / 1 seconds)
+    // Extract a frame every 1 seconds (fps = 1 frame / 1 seconds)
     await ffmpeg.exec(["-i", "input.mp4", "-vf", "fps=1/1", "output_%04d.png"]);
 
     const extractedFrames = [];
@@ -83,7 +83,7 @@ const VideoUploader = () => {
 
   // Handle frame click to jump to a specific time in the video
   const handleFrameClick = (frameIndex) => {
-    const time = frameIndex * 2; // Assuming 1 frame every 2 seconds
+    const time = frameIndex * 1; // Assuming 1 frame every 1 seconds
     if (playerRef.current) {
       playerRef.current.currentTime(time); // Seek to frame time
     }
