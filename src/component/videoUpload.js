@@ -1,19 +1,45 @@
 // VideoUpload.js
 import React from "react";
 import { useDropzone } from "react-dropzone";
+import axios from "axios";
 
 const VideoUpload = ({ onVideoSelect }) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "video/*": [".mp4", ".mov", ".avi"],
     },
-    onDrop: (acceptedFiles) => {
+    onDrop: async (acceptedFiles) => {
       if (acceptedFiles.length) {
         const videoFile = acceptedFiles[0];
-        onVideoSelect(URL.createObjectURL(videoFile)); // Pass video URL to parent component
+        const videoUrl = await uploadVideo(videoFile); // Upload video to server and get URL
+        onVideoSelect(videoUrl); // Pass the uploaded video URL to the parent component
       }
     },
   });
+
+  // Function to handle video upload to the server
+  const uploadVideo = async (file) => {
+    const formData = new FormData();
+    formData.append("video", file);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // The URL of the uploaded video on S3
+      return response.data.url;
+    } catch (error) {
+      console.error("Error uploading video:", error);
+      return null;
+    }
+  };
 
   return (
     <div
