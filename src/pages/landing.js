@@ -1,6 +1,6 @@
 import Navbar from "../component/navbar";
 import Partners from "../component/partners";
-import heroBg from "./assets/herobg.svg";
+import heroBg from "./assets/herobg.webp";
 import heroImg from "./assets/heroImg.svg";
 import segme from "./assets/segmentation.svg";
 import edit from "./assets/edit.svg";
