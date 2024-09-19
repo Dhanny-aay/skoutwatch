@@ -16,32 +16,32 @@ const Navbar = () => {
     <>
       <div
         id="overlay"
-        className=" w-full bg-[#fff] backdrop-blur-xl h-[350px] p-6 flex justify-center items-center -translate-y-[500px] shadow transition-all duration-700 top-[78px] fixed z-[99]"
+        className=" w-full bg-[#000] backdrop-blur-xl h-[350px] p-6 flex justify-center items-center -translate-y-[500px] shadow transition-all duration-700 top-[78px] fixed z-[99]"
       >
         <div className="w-full flex flex-col justify-center items-center space-y-5">
           <Link to="/">
-            <p className=" font-Inter text-[15px] font-semibold text-[#000]">
+            <p className=" font-Inter text-[15px] font-semibold text-[#fff]">
               Home
             </p>
           </Link>
           <Link to="/">
-            <p className=" font-Inter text-[15px] font-semibold text-[#000]">
+            <p className=" font-Inter text-[15px] font-semibold text-[#fff]">
               Pricing
             </p>
           </Link>
           <Link to="/">
-            <p className=" font-Inter text-[15px] font-semibold text-[#000]">
+            <p className=" font-Inter text-[15px] font-semibold text-[#fff]">
               Contact Us
             </p>
           </Link>
           <Link to="/">
-            <p className=" font-Inter text-[15px] font-semibold text-[#000]">
+            <p className=" font-Inter text-[15px] font-semibold text-[#fff]">
               About Us
             </p>
           </Link>
           <div className=" flex md:hidden z-50 items-center  mt-6">
             <div className=" flex items-center space-x-6">
-              <p className=" font-Inter text-black font-semibold text-[15px]">
+              <p className=" font-Inter text-[#fff] font-semibold text-[15px]">
                 Login
               </p>
               <button className="px-5 py-3 font-Inter text-base rounded-[40px] font-medium shadow bg-[#EFB339] text-white">
