@@ -20,17 +20,17 @@ const Landing = () => {
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
-        className=" w-full h-[850px] md:h-[850px] lg:h-[1030px] relative bg-black "
+        className=" w-full relative bg-black "
       >
         <Navbar />
         {/* hero */}
-        <div className=" px-4 md:px-14 lg:px-24 py-20 w-full">
-          <div className=" mt-12 md:mt-16 w-full lg:w-[800px]">
-            <p className=" font-LatoBold text-5xl md:text-[54px] text-white md:leading-[66px]">
+        <div className=" px-4 md:px-14 lg:px-24 py-16 w-full">
+          <div className=" mt-8 md:mt-16 w-full lg:w-[800px]">
+            <p className=" font-LatoBold text-[40px] leading-10 md:text-[54px] text-white md:leading-[66px]">
               Discover the Future of Football Talent with AI
             </p>
             <p
-              className=" mt-3 font-normal text-base md:text-lg font-Inter
+              className=" mt-4 font-normal text-base md:text-lg font-Inter
            text-white"
             >
               Unleash the power of advanced AI tracking and video editing to

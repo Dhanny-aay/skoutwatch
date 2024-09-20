@@ -45,7 +45,7 @@ const Navbar = () => {
                 Login
               </p>
               <button className="px-5 py-3 font-Inter text-base rounded-[40px] font-medium shadow bg-[#EFB339] text-white">
-                Request for a demo
+                Join the waitlist
               </button>
             </div>
           </div>
@@ -54,8 +54,8 @@ const Navbar = () => {
 
       <div className=" py-5 px-4 md:px-14 lg:px-24 flex items-center justify-between bg-transparent">
         <div className=" flex items-center space-x-16">
-          <img src={logo} className=" w-auto" alt="" />
-          <div className=" hidden lg:flex items-center space-x-6">
+          <img src={logo} className=" w-[80%] md:w-auto" alt="" />
+          {/* <div className=" hidden lg:flex items-center space-x-6">
             <Link
               to="/"
               className="  font-Inter font-semibold text-[#FFFFFF] text-[15px]"
@@ -80,21 +80,21 @@ const Navbar = () => {
             >
               About
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className=" flex items-center space-x-5">
-          <div className=" hidden md:flex items-center space-x-6">
-            <p className=" font-Inter text-white font-semibold text-[15px]">
+          <div className=" flex items-center space-x-3 md:space-x-6">
+            <p className=" font-Inter text-white font-semibold text-xs md:text-[15px]">
               Login
             </p>
             <button
               style={{ boxShadow: "0px 1px 2px 0px #1018280A" }}
-              className=" bg-[#EFB339] py-3 px-[18px] rounded-[40px] text-white font-Outfit font-medium text-[15px]"
+              className=" bg-[#EFB339] py-3 px-[18px] rounded-[40px] text-white font-Outfit font-medium text-xs md:text-[15px]"
             >
-              Request for a demo
+              Join the waitlist
             </button>
           </div>
-          <div onClick={overlay} className="menu-icon md:block lg:hidden">
+          <div onClick={overlay} className="menu-icon hidden">
             <input className="menu-icon__cheeckbox" type="checkbox" />
             <div>
               <span></span>

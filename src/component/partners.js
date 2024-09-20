@@ -2,6 +2,8 @@ import midas from "./assets/midas.svg";
 import fate from "./assets/fate.svg";
 import sit from "./assets/sit.svg";
 import kuda from "./assets/kuda.svg";
+import Carousel from "./carousel";
+import SecondCarousel from "./secondCarousel";
 
 const Partners = () => {
   const partners = [
@@ -16,7 +18,7 @@ const Partners = () => {
         <p className=" text-[#D99A26] font-semibold text-lg md:text-2xl font-LatoNormal">
           Our Partners
         </p>
-        <div className=" w-full grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+        {/* <div className=" w-full grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
           {partners.map((item, index) => (
             <div
               key={index}
@@ -29,7 +31,9 @@ const Partners = () => {
               />
             </div>
           ))}
-        </div>
+        </div> */}
+        <Carousel />
+        <SecondCarousel />
       </div>
     </>
   );

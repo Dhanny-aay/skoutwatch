@@ -8,6 +8,7 @@ const Prototype = () => {
   const [videoSrc, setVideoSrc] = useState(null); // Uploaded video URL
   const [pausedFrame, setPausedFrame] = useState(null); // Paused video frame details
   const [canvasRef, setCanvasRef] = useState(null); // Canvas reference
+  const [segmentationResponse, setSegmentationResponse] = useState(null); // SAM-2 API response
 
   // Called when a video is selected from VideoUpload
   const handleVideoSelect = (videoUrl) => setVideoSrc(videoUrl);
@@ -22,8 +23,13 @@ const Prototype = () => {
     setCanvasRef(ref); // Save the reference of the extracted frame canvas
   };
 
+  // Called when a valid response is received from ObjectSelector
+  const handleSegmentationResponse = (response) => {
+    setSegmentationResponse(response); // Store SAM-2 API response
+  };
+
   return (
-    <div className="relative w-full p-12 flex flex-col space-y-12 md:space-y-0 md:flex-row space-x-16">
+    <div className="relative w-full p-12 flex flex-col space-y-12 md:space-y-0 md:flex-row md:space-x-16">
       {/* Upload video component */}
       <VideoUpload onVideoSelect={handleVideoSelect} />
 
@@ -52,7 +58,26 @@ const Prototype = () => {
                 videoHeight={300}
                 videoSrc={videoSrc}
                 canvasRef={canvasRef} // Pass the canvas reference for drawing bounding box
+                onSegmentationResponse={handleSegmentationResponse} // Pass the segmentation response handler
               />
+            )}
+
+            {/* Show buttons only if a valid segmentation response exists */}
+            {segmentationResponse && (
+              <div className="w-[250px] grid grid-cols-2 gap-5 mt-6">
+                <a
+                  href={segmentationResponse.urls.cancel} // Cancel URL from the response
+                  className="py-3 px-5 bg-red-500 rounded-lg"
+                >
+                  Cancel
+                </a>
+                <a
+                  href={segmentationResponse.urls.get} // Get URL from the response
+                  className="py-3 px-5 bg-blue-500 rounded-lg"
+                >
+                  Get
+                </a>
+              </div>
             )}
           </div>
         )}

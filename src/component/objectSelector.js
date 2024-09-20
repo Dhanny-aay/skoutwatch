@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Stage, Layer, Rect } from "react-konva";
-import Replicate from "replicate";
 
-const ObjectSelector = ({ videoWidth, videoHeight, canvasRef, videoSrc }) => {
+const ObjectSelector = ({
+  videoWidth,
+  videoHeight,
+  canvasRef,
+  onSegmentationResponse,
+  videoSrc,
+}) => {
   const [rect, setRect] = useState({
     x: 0,
     y: 0,
@@ -11,48 +16,7 @@ const ObjectSelector = ({ videoWidth, videoHeight, canvasRef, videoSrc }) => {
     isDrawing: false,
   });
 
-  // const replicate = new Replicate({
-  //   auth: process.env.REACT_APP_REPLICATE_API_TOKEN,
-  // });
-
-  // Function to send frame and bounding box to SAM 2
-  // const sendToSam2 = async (imageData, boundingBox) => {
-  //   try {
-  //     const output = await replicate.run("meta/sam-2-video", {
-  //       input: {
-  //         image: imageData, // Sending compressed image
-  //         click_coordinates: `[${boundingBox.x}, ${boundingBox.y}]`, // top-left corner of bounding box
-  //         click_labels: "1",
-  //         click_frames: "0",
-  //         click_object_ids: "object_1",
-  //       },
-  //     });
-  //     console.log("Segmentation Result: ", output);
-  //   } catch (error) {
-  //     console.error("Error in SAM 2:", error);
-  //   }
-  // };
-
-  // Function to send frame and bounding box to SAM 2
-  // const sendToSam2 = async (imageData, boundingBox) => {
-  //   try {
-  //     const response = await axios.post("http://localhost:5000/api/replicate", {
-  //       input: {
-  //         image: imageData,
-  //
-  //         click_labels: "1",
-  //         click_frames: "0",
-  //         click_object_ids: "object_1",
-  //       },
-  //     });
-
-  //     console.log("Segmentation Result:", response.data);
-  //   } catch (error) {
-  //     console.error("Error in SAM 2:", error);
-  //   }
-  // };
-
-  const sendToSam2 = async (imageData, boundingBox) => {
+  const sendToSam2 = async (boundingBox) => {
     try {
       const response = await fetch("http://localhost:5000/api/replicate", {
         method: "POST",
@@ -88,6 +52,9 @@ const ObjectSelector = ({ videoWidth, videoHeight, canvasRef, videoSrc }) => {
 
       const data = await response.json();
       console.log("Segmentation Result:", data);
+
+      // Pass the result back to the parent component
+      onSegmentationResponse(data);
     } catch (error) {
       console.error("Error in SAM 2:", error);
     }
@@ -111,10 +78,6 @@ const ObjectSelector = ({ videoWidth, videoHeight, canvasRef, videoSrc }) => {
   const handleMouseUp = async () => {
     setRect({ ...rect, isDrawing: false });
 
-    // Extract the current frame as a data URL
-    const canvas = canvasRef.current;
-    const imageData = canvas.toDataURL("image/jpeg", 0.8); // Compressing at 80% quality
-
     const boundingBox = {
       x: rect.x,
       y: rect.y,
@@ -123,7 +86,7 @@ const ObjectSelector = ({ videoWidth, videoHeight, canvasRef, videoSrc }) => {
     };
 
     // Send frame and bounding box to SAM 2
-    sendToSam2(imageData, boundingBox);
+    sendToSam2(boundingBox);
   };
 
   return (
