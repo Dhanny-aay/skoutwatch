@@ -61,13 +61,17 @@ const Footer = () => {
             </Link>
           </div>
           <span className=" flex items-center space-x-5">
-            <img src={fb} alt="" />
-            <img src={twi} alt="" />
-            <img src={ig} alt="" />
+            {/* <img src={fb} alt="" /> */}
+            <Link to="https://twitter.com/skoutwatch" target="_blank">
+              <img src={twi} alt="" />
+            </Link>
+            <Link to="https://www.instagram.com/skoutwatch/" target="_blank">
+              <img src={ig} alt="" />
+            </Link>
           </span>
         </div>
         <p className=" text-center mt-8 text-[#5F6D7E] font-LatoNormal font-normal text-base">
-          © 2023 skoutwatch. All Rights Reserved.
+          © 2024 skoutwatch. All Rights Reserved.
         </p>
       </div>
     </>

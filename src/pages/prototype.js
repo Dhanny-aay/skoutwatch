@@ -28,6 +28,29 @@ const Prototype = () => {
     setSegmentationResponse(response); // Store SAM-2 API response
   };
 
+  // Function to send the "Get" API request
+  const handleGetRequest = async () => {
+    try {
+      const response = await fetch(segmentationResponse.urls.get, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_REPLICATE_API_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Get Request Data:", data);
+      // Handle the response data, e.g., display the result or trigger a download
+    } catch (error) {
+      console.error("Error in Get Request:", error);
+    }
+  };
+
   return (
     <div className="relative w-full p-12 flex flex-col space-y-12 md:space-y-0 md:flex-row md:space-x-16">
       {/* Upload video component */}
@@ -67,16 +90,16 @@ const Prototype = () => {
               <div className="w-[250px] grid grid-cols-2 gap-5 mt-6">
                 <a
                   href={segmentationResponse.urls.cancel} // Cancel URL from the response
-                  className="py-3 px-5 bg-red-500 rounded-lg"
+                  className="py-3 px-5 bg-red-500 rounded-lg text-center"
                 >
                   Cancel
                 </a>
-                <a
-                  href={segmentationResponse.urls.get} // Get URL from the response
-                  className="py-3 px-5 bg-blue-500 rounded-lg"
+                <button
+                  onClick={handleGetRequest} // Use onClick for making API requests
+                  className="py-3 px-5 bg-blue-500 rounded-lg text-center"
                 >
                   Get
-                </a>
+                </button>
               </div>
             )}
           </div>
