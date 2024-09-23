@@ -1,27 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import VideoUpload from "../component/videoUpload";
 import VideoPlayer from "../component/videoPlayer";
-import CanvasFrame from "../component/canvaFrame";
-import ObjectSelector from "../component/objectSelector";
 
 const Prototype = () => {
   const [videoSrc, setVideoSrc] = useState(null); // Uploaded video URL
-  const [pausedFrame, setPausedFrame] = useState(null); // Paused video frame details
-  const [canvasRef, setCanvasRef] = useState(null); // Canvas reference
   const [segmentationResponse, setSegmentationResponse] = useState(null); // SAM-2 API response
+  const [getRequestData, setGetRequestData] = useState(null); // Store the GET request response data
+  const [pollingActive, setPollingActive] = useState(false); // New state to track if polling is active
 
   // Called when a video is selected from VideoUpload
   const handleVideoSelect = (videoUrl) => setVideoSrc(videoUrl);
-
-  // Called when the video is paused to extract the frame
-  const handlePauseFrame = (time, width, height) => {
-    setPausedFrame({ time, width, height }); // Save paused frame details
-  };
-
-  // Called when the canvas is ready after the frame is extracted
-  const handleFrameExtracted = (ref) => {
-    setCanvasRef(ref); // Save the reference of the extracted frame canvas
-  };
 
   // Called when a valid response is received from ObjectSelector
   const handleSegmentationResponse = (response) => {
@@ -31,78 +19,118 @@ const Prototype = () => {
   // Function to send the "Get" API request
   const handleGetRequest = async () => {
     try {
-      const response = await fetch(segmentationResponse.urls.get, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_REPLICATE_API_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/get-segmentation",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ getUrl: segmentationResponse.urls.get }), // Send the get URL to the backend
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log("Get Request Data:", data);
-      // Handle the response data, e.g., display the result or trigger a download
+      console.log("Get Request Data from Server:", data);
+      setGetRequestData(data); // Store the response data in the state
     } catch (error) {
       console.error("Error in Get Request:", error);
     }
   };
 
-  return (
-    <div className="relative w-full p-12 flex flex-col space-y-12 md:space-y-0 md:flex-row md:space-x-16">
-      {/* Upload video component */}
-      <VideoUpload onVideoSelect={handleVideoSelect} />
+  // useEffect hook to start polling every 3 seconds after the button is clicked
+  useEffect(() => {
+    if (pollingActive && segmentationResponse) {
+      const intervalId = setInterval(() => {
+        handleGetRequest();
+      }, 3000); // Run every 3 seconds
 
-      <div>
+      if (
+        getRequestData?.status === "succeeded" ||
+        getRequestData?.status === "failed"
+      ) {
+        clearInterval(intervalId); // Stop the interval once status is "succeeded"
+        setPollingActive(false); // Optionally disable polling state
+      }
+
+      // Clean up the interval when the component is unmounted or when polling is disabled
+      return () => clearInterval(intervalId);
+    }
+  }, [pollingActive, segmentationResponse, getRequestData]);
+
+  // Function to handle the click event on the "Get" button
+  const startPolling = () => {
+    setPollingActive(true); // Enable polling after button click
+  };
+
+  const logContainerRef = useRef(null);
+
+  // Scroll to the bottom when getRequestData.logs updates
+  useEffect(() => {
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+    }
+  }, [getRequestData]); // Trigger the effect every time getRequestData changes
+
+  return (
+    <div className="relative w-full p-12 flex flex-col space-y-12 md:space-y-0 md:flex-row justify-between">
+      <div className="w-[48%]">
+        {/* Upload video component */}
+        <VideoUpload onVideoSelect={handleVideoSelect} />
         {/* If the video URL exists, render the video player */}
         {videoSrc && (
-          <VideoPlayer videoSrc={videoSrc} onPauseFrame={handlePauseFrame} />
+          <VideoPlayer
+            onSegmentationResponse={handleSegmentationResponse}
+            videoSrc={videoSrc}
+          />
+        )}
+        {segmentationResponse && (
+          <div className="w-[250px] grid grid-cols-2 gap-5 mt-6">
+            <a
+              href={segmentationResponse.urls.cancel} // Cancel URL from the response
+              className="py-3 px-5 bg-red-500 rounded-lg text-center"
+            >
+              Cancel
+            </a>
+            <button
+              onClick={startPolling} // Trigger polling when clicked
+              className="py-3 px-5 bg-blue-500 rounded-lg text-center"
+            >
+              Get
+            </button>
+          </div>
         )}
 
-        {/* If a frame is paused, render the canvas for that frame */}
-        {pausedFrame && (
-          <div className="relative mt-12">
-            {/* Canvas for displaying the paused video frame */}
-            <CanvasFrame
-              videoSrc={videoSrc}
-              time={pausedFrame.time}
-              videoWidth={600}
-              videoHeight={300}
-              onFrameExtracted={handleFrameExtracted} // Extract the canvas reference
-            />
-
-            {/* If canvas is ready, allow drawing bounding boxes with ObjectSelector */}
-            {canvasRef && (
-              <ObjectSelector
-                videoWidth={600}
-                videoHeight={300}
-                videoSrc={videoSrc}
-                canvasRef={canvasRef} // Pass the canvas reference for drawing bounding box
-                onSegmentationResponse={handleSegmentationResponse} // Pass the segmentation response handler
-              />
-            )}
-
-            {/* Show buttons only if a valid segmentation response exists */}
-            {segmentationResponse && (
-              <div className="w-[250px] grid grid-cols-2 gap-5 mt-6">
-                <a
-                  href={segmentationResponse.urls.cancel} // Cancel URL from the response
-                  className="py-3 px-5 bg-red-500 rounded-lg text-center"
+        {getRequestData && (
+          <>
+            <p className>{getRequestData.status}</p>
+            <div>
+              {getRequestData && (
+                <div
+                  className="w-full h-[300px] p-4 text-sm overflow-y-auto bg-black text-white font-mono"
+                  ref={logContainerRef}
                 >
-                  Cancel
-                </a>
-                <button
-                  onClick={handleGetRequest} // Use onClick for making API requests
-                  className="py-3 px-5 bg-blue-500 rounded-lg text-center"
-                >
-                  Get
-                </button>
-              </div>
-            )}
-          </div>
+                  {/* Convert \n to <br /> for line breaks */}
+                  {getRequestData.logs.split("\n").map((line, index) => (
+                    <p key={index}>{line}</p>
+                  ))}
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+
+      <div className="w-[48%]">
+        {getRequestData?.output?.[0] && (
+          <video className="w-full" controls>
+            <source src={getRequestData.output[0]} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         )}
       </div>
     </div>

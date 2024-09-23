@@ -78,15 +78,16 @@ const ObjectSelector = ({
   const handleMouseUp = async () => {
     setRect({ ...rect, isDrawing: false });
 
-    const boundingBox = {
-      x: rect.x,
-      y: rect.y,
-      width: rect.width,
-      height: rect.height,
+    // Normalize coordinates relative to the canvas size and video resolution
+    const normalizedBoundingBox = {
+      x: (rect.x / videoWidth) * videoWidth,
+      y: (rect.y / videoHeight) * videoHeight,
+      width: (rect.width / videoWidth) * videoWidth,
+      height: (rect.height / videoHeight) * videoHeight,
     };
 
-    // Send frame and bounding box to SAM 2
-    sendToSam2(boundingBox);
+    // Send normalized coordinates to SAM
+    console.log(normalizedBoundingBox);
   };
 
   return (

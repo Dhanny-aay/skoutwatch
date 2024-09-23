@@ -44,7 +44,7 @@ const VideoUpload = ({ onVideoSelect }) => {
   return (
     <div
       {...getRootProps()}
-      className="upload-box p-5 border-dashed border-2 border-[#ccc] "
+      className="upload-box p-5 border-dashed border-2 border-[#ccc] text-center"
     >
       <input {...getInputProps()} />
       <p>Drag and drop a video file, or click to select one</p>

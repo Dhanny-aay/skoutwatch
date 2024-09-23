@@ -67,6 +67,26 @@ app.post("/api/replicate", async (req, res) => {
   }
 });
 
+// Route to handle the "Get" request
+app.post("/api/get-segmentation", async (req, res) => {
+  const { getUrl } = req.body; // Get the URL from the request body
+
+  try {
+    // Make the request to the external API using axios
+    const response = await axios.get(getUrl, {
+      headers: {
+        Authorization: `Bearer ${process.env.REPLICATE_API_TOKEN}`,
+      },
+    });
+
+    // Send the response data back to the frontend
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error making request to external API:", error.message);
+    res.status(500).json({ error: "Error making request to external API" });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
