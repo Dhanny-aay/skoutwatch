@@ -44,9 +44,13 @@ const Navbar = () => {
               <p className=" font-Inter text-[#fff] font-semibold text-[15px]">
                 Login
               </p>
-              <button className="px-5 py-3 font-Inter text-base rounded-[40px] font-medium shadow bg-[#EFB339] text-white">
+              <a
+                href="https://docs.google.com/forms/d/160JQx_2iFgzWZVFLg8QtYzvpy-ISevYgsqd9KHQLn2o/viewform?edit_requested=true"
+                target="blank"
+                className="px-5 py-3 font-Inter text-base rounded-[40px] font-medium shadow bg-[#EFB339] text-white"
+              >
                 Join the waitlist
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -87,12 +91,14 @@ const Navbar = () => {
             <p className=" font-Inter text-white font-semibold text-xs md:text-[15px]">
               Login
             </p>
-            <button
+            <a
               style={{ boxShadow: "0px 1px 2px 0px #1018280A" }}
+              href="https://docs.google.com/forms/d/160JQx_2iFgzWZVFLg8QtYzvpy-ISevYgsqd9KHQLn2o/viewform?edit_requested=true"
+              target="blank"
               className=" bg-[#EFB339] py-3 px-[18px] rounded-[40px] text-white font-Outfit font-medium text-xs md:text-[15px]"
             >
               Join the waitlist
-            </button>
+            </a>
           </div>
           <div onClick={overlay} className="menu-icon hidden">
             <input className="menu-icon__cheeckbox" type="checkbox" />
