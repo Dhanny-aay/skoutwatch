@@ -7,6 +7,7 @@ const Prototype = () => {
   const [segmentationResponse, setSegmentationResponse] = useState(null); // SAM-2 API response
   const [getRequestData, setGetRequestData] = useState(null); // Store the GET request response data
   const [pollingActive, setPollingActive] = useState(false); // New state to track if polling is active
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   // Called when a video is selected from VideoUpload
   const handleVideoSelect = (videoUrl) => setVideoSrc(videoUrl);
@@ -19,16 +20,13 @@ const Prototype = () => {
   // Function to send the "Get" API request
   const handleGetRequest = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/get-segmentation",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ getUrl: segmentationResponse.urls.get }), // Send the get URL to the backend
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/api/get-segmentation`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ getUrl: segmentationResponse.urls.get }), // Send the get URL to the backend
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

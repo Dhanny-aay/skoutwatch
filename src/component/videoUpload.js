@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import axios from "axios";
 
 const VideoUpload = ({ onVideoSelect }) => {
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "video/*": [".mp4", ".mov", ".avi"],
@@ -23,15 +24,11 @@ const VideoUpload = ({ onVideoSelect }) => {
     formData.append("video", file);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(`${API_BASE_URL}/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       // The URL of the uploaded video on S3
       return response.data.url;

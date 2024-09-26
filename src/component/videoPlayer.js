@@ -5,6 +5,7 @@ const VideoPlayer = ({ videoSrc, onSegmentationResponse }) => {
   const [coordinates, setCoordinates] = useState(null);
   const [isReadyToTrack, setIsReadyToTrack] = useState(false);
   const [videoFPS, setVideoFPS] = useState(null);
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   const handlePause = () => {
     // Additional logic for when the video is paused
@@ -48,7 +49,7 @@ const VideoPlayer = ({ videoSrc, onSegmentationResponse }) => {
   const sendToSam2 = async () => {
     if (!coordinates) return;
     try {
-      const response = await fetch("http://localhost:5000/api/replicate", {
+      const response = await fetch(`${API_BASE_URL}/api/replicate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
