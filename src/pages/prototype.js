@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import VideoUpload from "../component/videoUpload";
 import VideoPlayer from "../component/videoPlayer";
 
 const Prototype = () => {
@@ -9,8 +8,15 @@ const Prototype = () => {
   const [pollingActive, setPollingActive] = useState(false); // New state to track if polling is active
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-  // Called when a video is selected from VideoUpload
-  const handleVideoSelect = (videoUrl) => setVideoSrc(videoUrl);
+  useEffect(() => {
+    // Retrieve the video URL from localStorage
+    const videoUrl = localStorage.getItem("uploadedVideoUrl");
+
+    if (videoUrl) {
+      // Set the retrieved video URL to the state
+      setVideoSrc(videoUrl);
+    }
+  }, []);
 
   // Called when a valid response is received from ObjectSelector
   const handleSegmentationResponse = (response) => {
@@ -77,8 +83,6 @@ const Prototype = () => {
   return (
     <div className="relative w-full p-12 flex flex-col space-y-12 md:space-y-0 md:flex-row justify-between">
       <div className="w-[48%]">
-        {/* Upload video component */}
-        <VideoUpload onVideoSelect={handleVideoSelect} />
         {/* If the video URL exists, render the video player */}
         {videoSrc && (
           <VideoPlayer

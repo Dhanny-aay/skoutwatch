@@ -1,7 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import Prototype from "./pages/prototype";
 import { useEffect } from "react";
 import Landing from "./pages/landing";
+import Upload from "./dashboard/pages/upload";
+import PrototypeV1 from "./dashboard/pages/prototypev1";
 
 function App() {
   const location = useLocation();
@@ -14,7 +15,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/prototype" element={<Prototype />} />
+        <Route path="/prototype" element={<PrototypeV1 />} />
+        <Route path="/upload" element={<Upload />} />
       </Routes>
     </>
   );
