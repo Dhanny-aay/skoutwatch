@@ -27,7 +27,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="w-full border-b border-[#EAEBF0] flex items-center justify-between px-8">
+      <div className="w-full border-b border-[#EAEBF0] flex items-center justify-between px-8 fixed top-0 left-0 bg-white z-50">
         <img src={logo} className="py-4" alt="Skoutwatch logo" />
         <div className="flex justify-between items-center space-x-3">
           {menuItems.map((item) => (
