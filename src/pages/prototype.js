@@ -113,25 +113,6 @@ const Prototype = () => {
             videoSrc={videoSrc}
           />
         )}
-
-        {getRequestData && (
-          <>
-            <p className>{getRequestData.status}</p>
-            <div>
-              {getRequestData && (
-                <div
-                  className="w-full h-[300px] p-4 text-sm overflow-y-auto bg-black font-mono"
-                  ref={logContainerRef}
-                >
-                  {/* Convert \n to <br /> for line breaks */}
-                  {getRequestData.logs.split("\n").map((line, index) => (
-                    <p key={index}>{line}</p>
-                  ))}
-                </div>
-              )}
-            </div>
-          </>
-        )}
       </div>
 
       <div className="w-full">
