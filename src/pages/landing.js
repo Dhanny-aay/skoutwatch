@@ -34,7 +34,7 @@ const Landing = () => {
            text-white"
             >
               Unleash the power of advanced video editing to
-              connect with top football players worldwide. Analyze, and
+              connect with top football players worldwide. Analyze &
               refine talents with precision.
             </p>
             <button className=" mt-9 bg-[#EFB339] rounded-[30px] py-4 px-9 text-white text-center font-Inter text-base md:text-lg">
