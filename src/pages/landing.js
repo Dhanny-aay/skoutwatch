@@ -33,9 +33,9 @@ const Landing = () => {
               className=" mt-4 font-normal text-base md:text-lg font-Inter
            text-white"
             >
-              Unleash the power of advanced AI tracking and video editing to
-              connect with top football players worldwide. Scout, analyze, and
-              refine talent with precision.
+              Unleash the power of advanced video editing to
+              connect with top football players worldwide. Analyze, and
+              refine talents with precision.
             </p>
             <button className=" mt-9 bg-[#EFB339] rounded-[30px] py-4 px-9 text-white text-center font-Inter text-base md:text-lg">
               Get started today
