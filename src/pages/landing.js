@@ -27,7 +27,7 @@ const Landing = () => {
         <div className=" px-4 md:px-14 lg:px-24 py-16 w-full">
           <div className=" mt-8 md:mt-16 w-full lg:w-[800px]">
             <p className=" font-LatoBold text-[40px] leading-10 md:text-[54px] text-white md:leading-[66px]">
-              Discover the Future of Football Talent with AI
+              Generate Highlights & Game Insights from your Sports Footage
             </p>
             <p
               className=" mt-4 font-normal text-base md:text-lg font-Inter
