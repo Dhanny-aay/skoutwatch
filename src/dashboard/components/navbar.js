@@ -29,7 +29,7 @@ const Navbar = () => {
     <>
       <div className="w-full border-b border-[#EAEBF0] flex items-center justify-between px-8 fixed top-0 left-0 bg-white z-50">
         <img src={logo} className="py-4" alt="Skoutwatch logo" />
-        <div className="flex justify-between items-center space-x-3">
+        {/* <div className="flex justify-between items-center space-x-3">
           {menuItems.map((item) => (
             <div
               key={item.name}
@@ -41,7 +41,7 @@ const Navbar = () => {
                     : "text-[#666666]"
                 }`}
             >
-              {/* Inline style for active/inactive icon color */}
+               
               <img
                 src={item.icon}
                 alt={item.name}
@@ -61,9 +61,9 @@ const Navbar = () => {
             </span>
             <img src={down} alt="Dropdown" />
           </div>
-        </div>
+        </div> */}
         <div className=" flex items-center space-x-6 py-4">
-          <span className="relative">
+          {/* <span className="relative">
             <img src={searc} className="absolute left-4 top-[17px]" alt="" />
             <input
               type="text"
@@ -71,7 +71,7 @@ const Navbar = () => {
               className=" py-4 pr-4 rounded-[30px] bg-[#F5F5F4] text-[#666666] font-LatoNormal text-sm font-normal pl-10"
             />
           </span>
-          <img src={setting} className="" alt="" />
+          <img src={setting} className="" alt="" /> */}
           <img src={profile} className=" w-12 h-12" alt="" />
         </div>
       </div>

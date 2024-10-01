@@ -187,7 +187,7 @@ const Prototype = () => {
                     />
                   </button>
                   <div
-                    className={`absolute w-full top-10 left-0 overflow-hidden transition-max-height duration-500 ease-in-out ${
+                    className={`absolute w-full top-10 left-0 overflow-hidden  transition-max-height duration-500 ease-in-out ${
                       logsVisible ? "max-h-[300px]" : "max-h-0"
                     }`}
                   >
