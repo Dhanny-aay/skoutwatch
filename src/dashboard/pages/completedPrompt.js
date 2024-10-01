@@ -24,14 +24,14 @@ const CompletedPrompt = () => {
           </Link>
 
           {/* Proceed Button */}
-          <div className="w-full grid grid-cols-2 gap-3 absolute bottom-0 left-0">
+          {/* <div className="w-full grid grid-cols-2 gap-3 absolute bottom-0 left-0">
             <button className="w-full py-3 rounded-[40px] font-Inter font-semibold text-[#FFFFFF] text-base bg-[#D99A26]">
               Download
             </button>
             <button className="w-full py-3 rounded-[40px] font-Inter font-semibold text-[#231546] text-base bg-[#EAEBF0]">
               Scan NFT
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
