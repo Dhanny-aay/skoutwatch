@@ -1,7 +1,7 @@
 import Navbar from "../components/navbar";
 // import left from "./assets/arrow-left.svg";
 import inputAna from "./assets/inputAnal.mp4";
-import outAna from "./assets/output.mp4";
+import outAna from "./assets/output_Anal.webm";
 
 const Result = () => {
   return (
@@ -49,7 +49,7 @@ const Result = () => {
               Output
             </p>
             <video className=" rounded-[10px] w-full mt-2" controls>
-              <source src={outAna} type="video/mp4" />
+              <source src={outAna} type="video/webm" />
               Your browser does not support the video tag.
             </video>
             {/* <div className=" w-full h-[300px] mt-2 rounded-[10px] bg-[#EAEBF0] text-center">
