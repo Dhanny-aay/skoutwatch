@@ -30,7 +30,7 @@ const ProdUpload = () => {
         setTimeout(() => {
           setIsUploading(false);
           setUploadComplete(true);
-        }, 60000); // 60000ms = 60 seconds
+        }, 15000); // 60000ms = 60 seconds
       }
     },
   });

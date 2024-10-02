@@ -12,7 +12,7 @@ const Processing = () => {
   useEffect(() => {
     if (progress < 100) {
       const interval = setInterval(() => {
-        setProgress((prev) => prev + 100 / 90); // Increment to reach 100% in 90 seconds
+        setProgress((prev) => prev + 100 / 15); // Increment to reach 100% in 15 seconds
       }, 1000); // 1000ms = 1 second
 
       return () => clearInterval(interval); // Cleanup interval
