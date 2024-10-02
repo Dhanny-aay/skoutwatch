@@ -1,5 +1,7 @@
 import Navbar from "../components/navbar";
-import left from "./assets/arrow-left.svg";
+// import left from "./assets/arrow-left.svg";
+import inputAna from "./assets/inputAnal.mp4";
+import outAna from "./assets/output.mp4";
 
 const Result = () => {
   return (
@@ -32,18 +34,27 @@ const Result = () => {
             <p className=" font-semibold font-Inter text-base text-black">
               Input Video
             </p>
-            <div className=" w-full h-[300px] mt-2 rounded-[10px] bg-[#EAEBF0] text-center">
+
+            <video className=" rounded-[10px] w-full mt-2" controls>
+              <source src={inputAna} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            {/* <div className=" w-full h-[300px] mt-2 rounded-[10px] bg-[#EAEBF0] text-center">
               Fake Input video goes here
-            </div>
+            </div> */}
           </div>
           {/* Output video */}
           <div className=" w-full">
             <p className=" font-semibold font-Inter text-base text-black">
               Output
             </p>
-            <div className=" w-full h-[300px] mt-2 rounded-[10px] bg-[#EAEBF0] text-center">
+            <video className=" rounded-[10px] w-full mt-2" controls>
+              <source src={outAna} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            {/* <div className=" w-full h-[300px] mt-2 rounded-[10px] bg-[#EAEBF0] text-center">
               Fake Output video goes here
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

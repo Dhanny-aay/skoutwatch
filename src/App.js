@@ -8,6 +8,7 @@ import MakeChoie from "./dashboard/pages/choice";
 import Processing from "./dashboard/pages/processing";
 import CompletedPrompt from "./dashboard/pages/completedPrompt";
 import Result from "./dashboard/pages/result";
+import Select from "./dashboard/pages/select";
 
 function App() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function App() {
         {/* fake Pages  */}
         <Route path="/uploadv1" element={<ProdUpload />} />
         <Route path="/choicev1" element={<MakeChoie />} />
+        <Route path="/select" element={<Select />} />
         <Route path="/processing" element={<Processing />} />
         <Route path="/complete" element={<CompletedPrompt />} />
         <Route path="/result" element={<Result />} />
