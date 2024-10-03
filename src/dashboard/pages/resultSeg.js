@@ -22,8 +22,8 @@ const ResultSeg = () => {
           Object tracking
         </p>
         <p className=" text-xs text-[#000000B2] font-normal font-Inter mt-2">
-          You'll be able to see the resultSEs from our AI, segmenting and
-          tracking objects and applying visual effects to your video here.
+          You'll be able to see the results from our AI, segmenting and tracking
+          objects and applying visual effects to your video here.
         </p>
 
         <div className=" w-full grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">

@@ -17,7 +17,7 @@ const CompletedPromptSeg = () => {
             download, or collect your NFT reward!
           </p>
           <Link
-            to="/segmentation-result"
+            to="/result"
             className=" mt-6 bg-[#231546] rounded-[40px] py-3 w-[250px] text-center font-Inter font-semibold text-base text-white"
           >
             View Video

@@ -32,11 +32,11 @@ function App() {
         <Route path="/choicev1" element={<MakeChoie />} />
         <Route path="/select" element={<Select />} />
         <Route path="/processing" element={<Processing />} />
-        <Route path="/processing-segmentation" element={<ProcessingSeg />} />
+        <Route path="/processing-data" element={<ProcessingSeg />} />
         <Route path="/complete" element={<CompletedPrompt />} />
-        <Route path="/complete-segmentation" element={<CompletedPromptSeg />} />
+        <Route path="/complete-data" element={<CompletedPromptSeg />} />
         <Route path="/result" element={<Result />} />
-        <Route path="/segmentation-result" element={<ResultSeg />} />
+        <Route path="/data-result" element={<ResultSeg />} />
       </Routes>
     </>
   );
