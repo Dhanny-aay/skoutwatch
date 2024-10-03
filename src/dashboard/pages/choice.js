@@ -12,7 +12,7 @@ const MakeChoie = () => {
   // Handle proceed based on selected option
   const handleProceed = () => {
     if (optionSelected === "segmentation") {
-      navigate("/processing"); // Navigate to segmentation processing page
+      navigate("/processing-segmentation"); // Navigate to segmentation processing page
     } else if (optionSelected === "tracking") {
       navigate("/select"); // Navigate to select page
     }

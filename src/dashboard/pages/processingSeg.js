@@ -3,7 +3,7 @@ import Navbar from "../components/navbar";
 import sub from "./assets/Subtract.svg";
 import { useNavigate } from "react-router-dom";
 
-const Processing = () => {
+const ProcessingSeg = () => {
   const [progress, setProgress] = useState(0); // Progress state
   const [processComplete, setProcessComplete] = useState(false);
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Processing = () => {
 
   const handleProceed = () => {
     if (processComplete) {
-      navigate("/complete");
+      navigate("/complete-segmentation");
     }
   };
 
@@ -34,7 +34,7 @@ const Processing = () => {
         <div className="w-full md:max-w-[500px] h-full relative flex flex-col items-center justify-center">
           <img src={sub} alt="Segmentation in progress" />
           <p className="mt-6 font-LatoBold font-bold text-2xl text-[#272D37] text-center">
-            Analysis In Progress...
+            Segmentation In Progress...
           </p>
           <p className="mt-2 text-center text-base text-[#5F6D7E] font-LatoNormal font-normal">
             Processing your video... This may take a while.
@@ -73,4 +73,4 @@ const Processing = () => {
   );
 };
 
-export default Processing;
+export default ProcessingSeg;

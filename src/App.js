@@ -9,6 +9,9 @@ import Processing from "./dashboard/pages/processing";
 import CompletedPrompt from "./dashboard/pages/completedPrompt";
 import Result from "./dashboard/pages/result";
 import Select from "./dashboard/pages/select";
+import ResultSeg from "./dashboard/pages/resultSeg";
+import ProcessingSeg from "./dashboard/pages/processingSeg";
+import CompletedPromptSeg from "./dashboard/pages/completedSeg";
 
 function App() {
   const location = useLocation();
@@ -29,8 +32,11 @@ function App() {
         <Route path="/choicev1" element={<MakeChoie />} />
         <Route path="/select" element={<Select />} />
         <Route path="/processing" element={<Processing />} />
+        <Route path="/processing-segmentation" element={<ProcessingSeg />} />
         <Route path="/complete" element={<CompletedPrompt />} />
+        <Route path="/complete-segmentation" element={<CompletedPromptSeg />} />
         <Route path="/result" element={<Result />} />
+        <Route path="/segmentation-result" element={<ResultSeg />} />
       </Routes>
     </>
   );
