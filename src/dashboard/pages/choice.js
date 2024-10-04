@@ -6,7 +6,7 @@ import video from "./assets/video.svg";
 import { useNavigate } from "react-router-dom";
 
 const MakeChoie = () => {
-  const [optionSelected, setOptionSelected] = useState(""); // Track selected option as a string
+  const [optionSelected, setOptionSelected] = useState("");
   const navigate = useNavigate();
 
   // Handle proceed based on selected option

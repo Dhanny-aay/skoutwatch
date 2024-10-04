@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
+import ActivePageProvider from "./dashboard/contexts/demoPageContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,7 +17,9 @@ root.render(
           horizontal: "right",
         }}
       >
-        <App />
+        <ActivePageProvider>
+          <App />
+        </ActivePageProvider>
       </SnackbarProvider>
     </Router>
   </React.StrictMode>

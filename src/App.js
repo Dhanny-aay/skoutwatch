@@ -12,6 +12,7 @@ import Select from "./dashboard/pages/select";
 import ResultSeg from "./dashboard/pages/resultSeg";
 import ProcessingSeg from "./dashboard/pages/processingSeg";
 import CompletedPromptSeg from "./dashboard/pages/completedSeg";
+import Playground from "./dashboard/pages/playground";
 
 function App() {
   const location = useLocation();
@@ -36,6 +37,7 @@ function App() {
         <Route path="/complete" element={<CompletedPrompt />} />
         <Route path="/complete-data" element={<CompletedPromptSeg />} />
         <Route path="/result" element={<Result />} />
+        <Route path="/playground" element={<Playground />} />
         <Route path="/data-result" element={<ResultSeg />} />
       </Routes>
     </>
