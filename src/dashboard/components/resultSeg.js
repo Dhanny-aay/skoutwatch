@@ -1,7 +1,10 @@
 import inputAna from "./assets/inputSeg.mp4";
 import outAna from "./assets/outputSeg.mp4";
 
-const ResultSeg = () => {
+const ResultSeg = ({ setSegmentationStep }) => {
+  const handleProceed = () => {
+    setSegmentationStep("segmentation");
+  };
   return (
     <>
       <div className="absolute lg:left-[20%] top-[80px] p-6 w-[80%] h-[calc(100vh-80px)] overflow-y-auto">
@@ -13,9 +16,22 @@ const ResultSeg = () => {
               Back
             </p>
           </span> */}
-            <p className=" font-LatoNormal font-semibold text-[#231546] text-3xl">
-              Segmentation
-            </p>
+            <div className=" flex w-full items-center justify-between">
+              <p className=" font-LatoNormal font-semibold text-[#231546] text-3xl">
+                Segmentation
+              </p>
+              <div className=" flex items-center space-x-4">
+                <button
+                  onClick={handleProceed}
+                  className="bg-[#D99A26] px-4 py-2 rounded-lg text-xs font-Inter font-medium text-[#FFFFFF]"
+                >
+                  Segment another video
+                </button>
+                <button className="bg-[#EAEBF0] px-4 py-2 rounded-lg text-xs font-Inter font-medium text-[#000]">
+                  View NFT
+                </button>
+              </div>
+            </div>
           </div>
 
           <p className=" font-Inter font-semibold text-lg text-black mt-10">

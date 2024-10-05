@@ -20,7 +20,7 @@ const ProcessingTrack = ({ setTrackingStep }) => {
 
   const handleProceed = () => {
     if (processComplete) {
-      setTrackingStep("CompleteTrack");
+      setTrackingStep("ResultTrack");
     }
   };
   return (

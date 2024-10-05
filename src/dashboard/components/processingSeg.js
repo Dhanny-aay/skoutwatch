@@ -20,7 +20,7 @@ const ProcessingSeg = ({ setSegmentationStep }) => {
 
   const handleProceed = () => {
     if (processComplete) {
-      setSegmentationStep("CompleteSeg");
+      setSegmentationStep("ResultSeg");
     }
   };
 

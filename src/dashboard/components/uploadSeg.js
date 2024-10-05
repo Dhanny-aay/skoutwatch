@@ -20,9 +20,12 @@ const UploadSeg = ({ setSegmentationStep }) => {
     onDrop: async (acceptedFiles) => {
       if (acceptedFiles.length) {
         const videoFile = acceptedFiles[0];
+        const videoSrc = URL.createObjectURL(videoFile); // Create video URL
+
         setSelectedVideo({
           name: videoFile.name,
           size: (videoFile.size / (1024 * 1024)).toFixed(2), // File size in MB
+          src: videoSrc, // Save the video source
         });
         setIsUploading(true); // Start uploading
 
@@ -58,6 +61,7 @@ const UploadSeg = ({ setSegmentationStep }) => {
             <p className="text-[#353535] font-LatoNormal font-semibold text-base">
               Upload
             </p>
+
             <div
               {...getRootProps()}
               className="upload-box p-6 border-dashed border rounded-[6px] border-[#CACACA] text-center w-full mt-4 flex flex-col items-center justify-center"
@@ -114,8 +118,15 @@ const UploadSeg = ({ setSegmentationStep }) => {
               </div>
             )}
 
+            {uploadComplete && (
+              <video className=" rounded-[10px] w-full mt-4" controls>
+                <source src={selectedVideo.src} />
+                Your browser does not support the video tag.
+              </video>
+            )}
+
             {/* Proceed Button */}
-            <div className="w-full grid grid-cols-1 gap-6 absolute bottom-0 left-0">
+            <div className="w-full grid grid-cols-1 gap-6 mt-6 bottom-0 left-0">
               <button
                 className={`w-full py-3 rounded-[40px] font-Inter font-semibold text-[#FFFFFF] text-base ${
                   uploadComplete

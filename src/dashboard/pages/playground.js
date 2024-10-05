@@ -27,14 +27,14 @@ const Playground = () => {
     Select: <SelectObject setSegmentationStep={setSegmentationStep} />,
     ProcessingSeg: <ProcessingSeg setSegmentationStep={setSegmentationStep} />,
     CompleteSeg: <CompleteSeg setSegmentationStep={setSegmentationStep} />,
-    ResultSeg: <ResultSeg />,
+    ResultSeg: <ResultSeg setSegmentationStep={setSegmentationStep} />,
   };
 
   const trackingComponents = {
     tracking: <UploadTrack setTrackingStep={setTrackingStep} />,
     ProcessingTrack: <ProcessingTrack setTrackingStep={setTrackingStep} />,
     CompleteTrack: <CompleteTrack setTrackingStep={setTrackingStep} />,
-    ResultTrack: <ResultTrack />,
+    ResultTrack: <ResultTrack setTrackingStep={setTrackingStep} />,
   };
 
   // Determine which flow is currently active (segmentation or tracking)
