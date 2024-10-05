@@ -1,12 +1,8 @@
-import { useContext } from "react";
 import succ from "./assets/succ.svg";
-import { ActivePageContext } from "../contexts/demoPageContext";
 
-const CompleteSeg = () => {
-  const { setActivePage } = useContext(ActivePageContext);
-
+const CompleteSeg = ({ setSegmentationStep }) => {
   const handleProceed = () => {
-    setActivePage("ResultSeg");
+    setSegmentationStep("ResultSeg");
   };
   return (
     <>

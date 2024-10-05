@@ -1,17 +1,15 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import upload from "./assets/upload-01.svg";
 import videoIcon from "./assets/video-recorder.svg";
 import trash from "./assets/Trash.svg";
 import uploading from "./assets/uploading.gif";
 import tick from "./assets/tick-circle.svg";
-import { ActivePageContext } from "../contexts/demoPageContext";
 
-const UploadTrack = () => {
+const UploadTrack = ({ setTrackingStep }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isUploading, setIsUploading] = useState(false); // For tracking upload status
   const [uploadComplete, setUploadComplete] = useState(false); // For tracking if upload is complete
-  const { setActivePage } = useContext(ActivePageContext);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -44,7 +42,7 @@ const UploadTrack = () => {
 
   const handleProceed = () => {
     if (uploadComplete) {
-      setActivePage("ProcessingTrack");
+      setTrackingStep("ProcessingTrack");
     }
   };
 

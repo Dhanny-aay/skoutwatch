@@ -8,6 +8,9 @@ const Sidebar = () => {
   const [optionSelected, setOptionSelected] = useState("");
   const { setActivePage } = useContext(ActivePageContext);
 
+  // const { setSegmentationPage } = useContext(SegmentationPageContext);
+  // const { setTrackingPage } = useContext(TrackingPageContext);
+
   // Set selected option based on what the user clicked
   const handleOptionClick = (option) => {
     setOptionSelected(option);
@@ -17,7 +20,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="fixed top-[80px] left-0 z-[999] w-[20%] h-[calc(100vh-80px)] overflow-y-auto">
-        <div className=" w-full grid items-center justify-center grid-cols-1 gap-8 md:gap-6 py-8 ">
+        <div className=" w-full grid items-center justify-center grid-cols-1 gap-8 md:gap-6 py-8 px-6 ">
           {/* Option 1: Segmentation */}
           <div
             onClick={() => handleOptionClick("segmentation")}
@@ -33,11 +36,11 @@ const Sidebar = () => {
             >
               <img src={union} className=" w-12 md:w-14" alt="Segmentation" />
             </div>
-            <p className="mt-3 text-[#231546] font-LatoBold text-xl md:text-lg font-bold">
+            <p className="mt-3 text-[#231546] font-LatoBold text-xl md:text-lg font-bold text-center">
               Segmentation
             </p>
-            <p className="mt-1 font-normal text-sm md:text-sm font-LatoNormal text-[#231546]">
-              Split video into key segments.
+            <p className="mt-1 font-normal text-sm md:text-sm font-LatoNormal text-center text-[#231546]">
+              Segment & track player and ball movements.
             </p>
           </div>
 
@@ -56,11 +59,11 @@ const Sidebar = () => {
             >
               <img src={track} className=" w-12 md:w-14" alt="Tracking" />
             </div>
-            <p className=" mt-3 text-[#231546] font-LatoBold text-xl md:text-lg font-bold">
-              Object Tracking
+            <p className=" mt-3 text-[#231546] font-LatoBold text-xl md:text-lg font-bold text-center">
+              Data Analysis
             </p>
-            <p className=" mt-1 font-normal text-sm md:text-sm font-LatoNormal text-[#231546]">
-              Track player and ball movements.
+            <p className=" mt-1 font-normal text-sm md:text-sm font-LatoNormal text-center text-[#231546]">
+              Monitor detailed movements of players and the ball.
             </p>
           </div>
 

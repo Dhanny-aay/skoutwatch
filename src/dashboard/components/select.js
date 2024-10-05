@@ -1,11 +1,9 @@
-import { useContext, useState } from "react";
-import { ActivePageContext } from "../contexts/demoPageContext";
+import { useState } from "react";
 import firstFrame from "./assets/firstframe.png";
 
-const SelectObject = () => {
+const SelectObject = ({ setSegmentationStep }) => {
   const [clicks, setClicks] = useState([]); // Store click coordinates
   const [optionSelected, setOptionSelected] = useState(false);
-  const { setActivePage } = useContext(ActivePageContext);
 
   // Handle image click to add "X" mark
   const handleImageClick = (e) => {
@@ -24,7 +22,7 @@ const SelectObject = () => {
   };
 
   const handleProceed = () => {
-    setActivePage("ProcessingSeg"); // Navigate to processing page
+    setSegmentationStep("ProcessingSeg"); // Navigate to processing page
   };
 
   return (

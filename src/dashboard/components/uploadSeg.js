@@ -7,11 +7,11 @@ import uploading from "./assets/uploading.gif";
 import tick from "./assets/tick-circle.svg";
 import { ActivePageContext } from "../contexts/demoPageContext";
 
-const UploadSeg = () => {
+const UploadSeg = ({ setSegmentationStep }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [isUploading, setIsUploading] = useState(false); // For tracking upload status
-  const [uploadComplete, setUploadComplete] = useState(false); // For tracking if upload is complete
-  const { setActivePage } = useContext(ActivePageContext);
+  const [isUploading, setIsUploading] = useState(false); // Track upload status
+  const [uploadComplete, setUploadComplete] = useState(false); // Track upload completion
+  const { setActivePage } = useContext(ActivePageContext); // Context to switch segmentation steps
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -26,7 +26,7 @@ const UploadSeg = () => {
         });
         setIsUploading(true); // Start uploading
 
-        // After 6 seconds, stop uploading and mark as complete
+        // After 6 seconds, simulate upload completion
         setTimeout(() => {
           setIsUploading(false);
           setUploadComplete(true);
@@ -35,30 +35,32 @@ const UploadSeg = () => {
     },
   });
 
-  // Function to reset everything
+  // Function to reset upload state
   const resetUploadProcess = () => {
     setSelectedVideo(null);
     setIsUploading(false);
     setUploadComplete(false);
   };
 
+  // Function to handle page navigation after upload completes
   const handleProceed = () => {
     if (uploadComplete) {
-      setActivePage("Select");
+      // Switch to the next step in the segmentation flow
+      setSegmentationStep("Select");
     }
   };
 
   return (
     <>
       <div className="absolute lg:left-[20%] top-[80px] p-6 w-[80%] h-[calc(100vh-80px)] overflow-y-auto">
-        <div className="  w-full justify-center h-full flex items-center">
-          <div className=" md:px-6 py-4 w-full md:w-[500px] h-full relative">
-            <p className=" text-[#353535] font-LatoNormal font-semibold text-base">
+        <div className="w-full justify-center h-full flex items-center">
+          <div className="md:px-6 py-4 w-full md:w-[500px] h-full relative">
+            <p className="text-[#353535] font-LatoNormal font-semibold text-base">
               Upload
             </p>
             <div
               {...getRootProps()}
-              className="upload-box p-6 border-dashed border rounded-[6px] border-[#CACACA] text-center w-full mt-4 flex flex-col items-center justify-center "
+              className="upload-box p-6 border-dashed border rounded-[6px] border-[#CACACA] text-center w-full mt-4 flex flex-col items-center justify-center"
             >
               <input {...getInputProps()} />
               <span className="w-11 h-11 bg-[#F5F5F5] rounded-full flex items-center justify-center">
@@ -95,7 +97,7 @@ const UploadSeg = () => {
                     src={uploadComplete ? tick : trash}
                     alt={uploadComplete ? "Tick icon" : "Trash icon"}
                     onClick={uploadComplete ? null : resetUploadProcess} // Reset only if trash is shown
-                    className="cursor-pointer" // Make it clickable
+                    className="cursor-pointer"
                   />
                 </div>
 

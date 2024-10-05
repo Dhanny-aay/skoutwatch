@@ -1,12 +1,8 @@
-import { useContext } from "react";
 import succ from "./assets/succ.svg";
-import { ActivePageContext } from "../contexts/demoPageContext";
 
-const CompleteTrack = () => {
-  const { setActivePage } = useContext(ActivePageContext);
-
+const CompleteTrack = ({ setTrackingStep }) => {
   const handleProceed = () => {
-    setActivePage("ResultTrack");
+    setTrackingStep("ResultTrack");
   };
   return (
     <>

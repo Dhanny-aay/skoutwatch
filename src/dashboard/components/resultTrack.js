@@ -19,11 +19,11 @@ const ResultTrack = () => {
           </div>
 
           <p className=" font-Inter font-semibold text-lg text-black mt-10">
-            Object tracking
+            Unlock advanced performance metrics.
           </p>
           <p className=" text-sm text-[#000000B2] font-normal font-Inter mt-2">
-            You'll be able to see the results from our AI, segmenting and
-            tracking objects and applying visual effects to your video here.
+            Explore detailed AI-driven insights, as we segment and track
+            objects, applying advanced visual analytics to enhance your video.
           </p>
 
           <div className=" w-full grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">

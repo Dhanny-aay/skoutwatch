@@ -1,11 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import sub from "./assets/Subtract.svg";
-import { ActivePageContext } from "../contexts/demoPageContext";
 
-const ProcessingTrack = () => {
+const ProcessingTrack = ({ setTrackingStep }) => {
   const [progress, setProgress] = useState(0); // Progress state
   const [processComplete, setProcessComplete] = useState(false);
-  const { setActivePage } = useContext(ActivePageContext);
 
   // Update progress every second
   useEffect(() => {
@@ -22,7 +20,7 @@ const ProcessingTrack = () => {
 
   const handleProceed = () => {
     if (processComplete) {
-      setActivePage("CompleteTrack");
+      setTrackingStep("CompleteTrack");
     }
   };
   return (
