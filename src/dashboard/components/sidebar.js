@@ -60,7 +60,7 @@ const Sidebar = () => {
               <img src={track} className=" w-12 md:w-14" alt="Tracking" />
             </div>
             <p className=" mt-3 text-[#231546] font-LatoBold text-xl md:text-lg font-bold text-center">
-              Data Analysis
+              Match Analysis
             </p>
             <p className=" mt-1 font-normal text-sm md:text-sm font-LatoNormal text-center text-[#231546]">
               Monitor detailed movements of players and the ball.

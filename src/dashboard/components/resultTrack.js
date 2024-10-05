@@ -19,7 +19,7 @@ const ResultTrack = ({ setTrackingStep }) => {
           </span> */}
             <div className=" flex w-full items-center justify-between">
               <p className=" font-LatoNormal font-semibold text-[#231546] text-3xl">
-                Data Analysis
+                Football Match Analysis
               </p>
               <div className=" flex items-center space-x-4">
                 <button
