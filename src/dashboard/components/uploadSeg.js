@@ -121,7 +121,7 @@ const UploadSeg = ({ setSegmentationStep }) => {
 
             {uploadComplete && (
               <video className=" rounded-[10px] w-full mt-4" controls>
-                <source src={selectedVideo.src} />
+                {/* <source src={selectedVideo.src} /> */}
                 <source src={inputAna} />
                 Your browser does not support the video tag.
               </video>
