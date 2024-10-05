@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
+import inputAna from "./assets/inputAnal.mp4";
 import upload from "./assets/upload-01.svg";
 import videoIcon from "./assets/video-recorder.svg";
 import trash from "./assets/Trash.svg";
@@ -115,7 +116,8 @@ const UploadTrack = ({ setTrackingStep }) => {
 
             {uploadComplete && (
               <video className=" rounded-[10px] w-full mt-4" controls>
-                <source src={selectedVideo.src} />
+                <source src={inputAna} />
+                {/* <source src={selectedVideo.src} /> */}
                 Your browser does not support the video tag.
               </video>
             )}

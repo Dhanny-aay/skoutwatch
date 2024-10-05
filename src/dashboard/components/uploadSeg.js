@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import inputAna from "./assets/inputSeg.mp4";
 import { useDropzone } from "react-dropzone";
 import upload from "./assets/upload-01.svg";
 import videoIcon from "./assets/video-recorder.svg";
@@ -121,6 +122,7 @@ const UploadSeg = ({ setSegmentationStep }) => {
             {uploadComplete && (
               <video className=" rounded-[10px] w-full mt-4" controls>
                 <source src={selectedVideo.src} />
+                <source src={inputAna} />
                 Your browser does not support the video tag.
               </video>
             )}
