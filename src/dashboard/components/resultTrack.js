@@ -50,7 +50,7 @@ const ResultTrack = ({ setTrackingStep }) => {
                 Input Video
               </p>
 
-              <video className=" rounded-[10px] w-full mt-2" controls>
+              <video className=" rounded-[10px] w-full mt-2" controls muted>
                 <source src={inputAna} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
@@ -63,7 +63,7 @@ const ResultTrack = ({ setTrackingStep }) => {
               <p className=" font-semibold font-Inter text-xl text-black">
                 Output Video
               </p>
-              <video className=" rounded-[10px] w-full mt-2" controls>
+              <video className=" rounded-[10px] w-full mt-2" controls muted>
                 <source src={outAna} type="video/webm" />
                 Your browser does not support the video tag.
               </video>
