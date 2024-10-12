@@ -11,8 +11,10 @@ import { useNavigate } from "react-router-dom";
 const VideoUpload = () => {
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videoSrc, setVideoSrc] = useState("");
   const [isUploading, setIsUploading] = useState(false); // For tracking upload status
   const [uploadComplete, setUploadComplete] = useState(false); // For tracking if upload is complete
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate(); // Hook for navigation
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -22,18 +24,27 @@ const VideoUpload = () => {
     onDrop: async (acceptedFiles) => {
       if (acceptedFiles.length) {
         const videoFile = acceptedFiles[0];
+
+        // Check if the file size exceeds 15 MB
+        if (videoFile.size > 15 * 1024 * 1024) {
+          setErrorMessage("File size exceeds 15 MB limit."); // Set error message
+          return; // Exit early if file is too large
+        } else {
+          setErrorMessage(""); // Clear any previous error messages
+        }
+
         setSelectedVideo({
           name: videoFile.name,
-          size: (videoFile.size / (1024 * 1024)).toFixed(2), // File size in MB
+          size: (videoFile.size / (1024 * 1024)).toFixed(2),
         });
-        setIsUploading(true); // Start uploading
-        const videoUrl = await uploadVideo(videoFile); // Upload video to server and get URL
-        if (videoUrl) {
-          setUploadComplete(true); // Set upload to complete once we get the URL
-          // Save the video URL to localStorage
-          localStorage.setItem("uploadedVideoUrl", videoUrl);
+        setIsUploading(true);
+        const uploadedVideoUrl = await uploadVideo(videoFile);
+        if (uploadedVideoUrl) {
+          setUploadComplete(true);
+          localStorage.setItem("uploadedVideoUrl", uploadedVideoUrl);
+          setVideoSrc(uploadedVideoUrl);
         }
-        setIsUploading(false); // Reset the uploading state
+        setIsUploading(false);
       }
     },
   });
@@ -64,7 +75,6 @@ const VideoUpload = () => {
     setIsUploading(false);
     setUploadComplete(false);
 
-    // Clear the video URL from localStorage
     localStorage.removeItem("uploadedVideoUrl");
   };
 
@@ -92,8 +102,11 @@ const VideoUpload = () => {
           </span>
         </p>
         <p className="mt-1 font-Inter text-xs text-[#666666] font-normal">
-          (Max. File size: 25 MB)
+          (Max. File size: 15 MB)
         </p>
+        {errorMessage && (
+          <p className="text-red-600 text-xs mt-2 font-Inter">{errorMessage}</p>
+        )}
       </div>
 
       {/* Video details */}
@@ -133,8 +146,15 @@ const VideoUpload = () => {
         </div>
       )}
 
+      {uploadComplete && (
+        <video className=" rounded-[10px] w-full mt-6" controls muted>
+          <source src={videoSrc} />
+          Your browser does not support the video tag.
+        </video>
+      )}
+
       {/* Proceed Button */}
-      <div className="w-full grid grid-cols-1 gap-6 absolute bottom-0 left-0">
+      <div className="w-full grid grid-cols-1 gap-6 mt-8">
         <button
           className={`w-full py-3 rounded-[40px] font-Inter font-semibold text-[#FFFFFF] text-base ${
             uploadComplete

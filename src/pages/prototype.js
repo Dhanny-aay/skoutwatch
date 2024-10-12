@@ -2,12 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import VideoPlayer from "../component/videoPlayer";
 import logs from "./assets/logs.svg";
 import down from "./assets/arrow-down.svg";
+import load from "./assets/blackload.gif";
 
 const Prototype = () => {
   const [videoSrc, setVideoSrc] = useState(null);
+  const [videoThumbnail, setVideoThumbnail] = useState(null);
   const [segmentationResponse, setSegmentationResponse] = useState(null); // SAM-2 API response
   const [getRequestData, setGetRequestData] = useState(null); // Store the GET request response data
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const UNDERDOG_BASE_URL = process.env.REACT_APP_UNDERDOG_BASE_URL;
 
   useEffect(() => {
     // Retrieve the video URL from localStorage
@@ -16,6 +19,16 @@ const Prototype = () => {
     if (videoUrl) {
       // Set the retrieved video URL to the state
       setVideoSrc(videoUrl);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Retrieve the video thumbnail from localStorage
+    const storedThumbnail = localStorage.getItem("videoThumbnail");
+
+    if (storedThumbnail) {
+      // Set the retrieved video thumbnail to the state
+      setVideoThumbnail(storedThumbnail);
     }
   }, []);
 
@@ -104,9 +117,13 @@ const Prototype = () => {
 
   return (
     <div className="relative w-full  mt-6 grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <div className="w-full">
-        {/* If the video URL exists, render the video player */}
-        <p className=" font-semibold font-Inter text-base text-black">Video</p>
+      <div className="w-full ">
+        <p className=" font-semibold font-LatoBold text-black text-2xl">
+          Video
+        </p>
+        <p className=" font-Inter text-xs font-normal text-black text-opacity-70">
+          Start by clicking 'Add object' to select items within this frame
+        </p>
         {videoSrc && (
           <VideoPlayer
             onSegmentationResponse={handleSegmentationResponse}
@@ -117,22 +134,35 @@ const Prototype = () => {
 
       <div className="w-full">
         <div className="flex items-center justify-between">
-          <p className="font-semibold font-Inter text-base text-black">
-            Output
-          </p>
+          <div>
+            <p className="font-semibold font-LatoBold text-black text-2xl">
+              Output
+            </p>
+            {/* <p className=" font-Inter text-xs font-normal text-black text-opacity-70">
+              Your result will show here
+            </p> */}
+          </div>
           {getRequestData && (
             <span className="flex items-center space-x-3">
               <p className="text-black text-base font-medium font-Inter">
                 Status:
               </p>
               <p
-                className="py-2 px-[10px] font-LatoNormal font-normal text-sm rounded-[20px] capitalize"
+                className="py-2 px-[10px] font-LatoNormal font-normal text-sm rounded-[20px] capitalize flex items-center space-x-2"
                 style={{
                   backgroundColor: statusStyles.bgColor,
                   color: statusStyles.textColor,
                 }}
               >
                 {getRequestData.status}
+                {(getRequestData.status === "starting" ||
+                  getRequestData.status === "processing") && (
+                  <img
+                    src={load}
+                    alt="Loading"
+                    className="w-4 h-4 ml-3" // Adjust size as needed
+                  />
+                )}
               </p>
             </span>
           )}
@@ -162,40 +192,40 @@ const Prototype = () => {
             )}
 
             {/* Show the processing logs */}
-            <div>
-              <div
-                className="w-full h-[300px] p-4 text-sm overflow-y-auto bg-[#EAEBF0] text-[#000000B2] rounded-[15px] font-mono mt-6"
-                ref={logContainerRef}
-              >
-                <div className="w-full h-full relative">
-                  <p className="absolute top-0 left-0 text-xs font-semibold font-Inter text-black">
-                    Processing Logs
+            <div className="w-full  p-4 text-sm bg-[#EAEBF0] text-[#000000B2] rounded-[15px] mt-6 flex flex-col">
+              {/* Fixed header */}
+              <div className="flex items-center justify-between w-full bg-[#EAEBF0] z-20">
+                <p className="text-xs font-semibold font-Inter text-black">
+                  Processing Logs
+                </p>
+                <button
+                  onClick={toggleLogsVisibility} // Toggle logs on button click
+                  className="border border-[#EBF4EF] py-2 px-3 bg-[#FFFFFF] rounded-[8px] flex items-center space-x-2"
+                >
+                  <p className="font-LatoNormal font-normal text-sm text-[#121212]">
+                    {logsVisible ? "Hide log" : "Show log"}
                   </p>
-                  <button
-                    onClick={toggleLogsVisibility} // Toggle logs on button click
-                    className="absolute top-0 right-0 border border-[#EBF4EF] py-2 px-3 bg-[#FFFFFF] rounded-[8px] flex items-center space-x-2"
-                  >
-                    <p className="font-LatoNormal font-normal text-sm text-[#121212]">
-                      {logsVisible ? "Hide log" : "Show log"}
-                    </p>
-                    <img
-                      src={down}
-                      alt=""
-                      className={`transform transition-transform duration-300 ${
-                        logsVisible ? "rotate-0" : "rotate-180"
-                      }`}
-                    />
-                  </button>
-                  <div
-                    className={`absolute w-full top-10 left-0 overflow-hidden  transition-max-height duration-500 ease-in-out ${
-                      logsVisible ? "max-h-[300px]" : "max-h-0"
+                  <img
+                    src={down}
+                    alt=""
+                    className={`transform transition-transform duration-300 ${
+                      logsVisible ? "rotate-0" : "rotate-180"
                     }`}
-                  >
-                    {getRequestData.logs.split("\n").map((line, index) => (
-                      <p key={index}>{line}</p>
-                    ))}
-                  </div>
-                </div>
+                  />
+                </button>
+              </div>
+
+              {/* Logs section */}
+              <div
+                className={`flex-1 overflow-y-auto transition-max-height duration-500 font-mono ease-in-out ${
+                  logsVisible ? "max-h-[250px]" : "max-h-0"
+                }`}
+                ref={logContainerRef}
+                key={getRequestData.logs} // Force re-render when logs update
+              >
+                {getRequestData.logs.split("\n").map((line, index) => (
+                  <p key={index}>{line}</p>
+                ))}
               </div>
             </div>
           </>

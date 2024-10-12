@@ -44,7 +44,6 @@ const VideoPlayer = ({ videoSrc, onSegmentationResponse }) => {
       if (coordinatesList.length < 5) {
         setCoordinatesList((prevList) => [...prevList, newCoordinate]);
         setIsSelecting(false); // Disable selection after adding the coordinate
-        video.play(); // Resume normal video behavior after selecting coordinate
       } else {
         enqueueSnackbar("You can only select up to 5 coordinates.", {
           variant: "error",
@@ -85,14 +84,14 @@ const VideoPlayer = ({ videoSrc, onSegmentationResponse }) => {
         body: JSON.stringify({
           input: {
             mask_type: maskType,
-            video_fps: 50,
+            video_fps: 30,
             click_frames: "1",
             input_video: videoSrc,
             click_labels: "1",
             output_video: true,
             output_format: "webp",
             output_quality: 80,
-            annotation_type: "mask",
+            annotation_type: "both",
             click_object_ids: coordinatesList
               .map((_, index) => `object_${index + 1}`)
               .join(","), // Join the IDs into a comma-separated string
@@ -118,16 +117,36 @@ const VideoPlayer = ({ videoSrc, onSegmentationResponse }) => {
 
   return (
     <div className=" mt-2 w-full">
-      <video
-        onClick={handleClick}
-        ref={videoRef}
-        width="600"
-        className=" rounded-[10px]"
-        controls={!isSelecting} // Disable default controls during coordinate selection
-      >
-        <source src={videoSrc} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <div className=" relative block">
+        <video
+          onClick={handleClick}
+          ref={videoRef}
+          width="600"
+          className=" rounded-[10px]"
+          muted
+        >
+          <source src={videoSrc} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Render X marks at the clicked coordinates */}
+        {coordinatesList.map((coordinate, index) => (
+          <div
+            key={index}
+            className=" text-red-600 font-LatoBold"
+            style={{
+              position: "absolute",
+              top: `${(coordinate.y / videoRef.current.videoHeight) * 100}%`,
+              left: `${(coordinate.x / videoRef.current.videoWidth) * 100}%`,
+              transform: "translate(-50%, -50%)",
+              fontSize: "24px",
+              pointerEvents: "none",
+            }}
+          >
+            ✖
+          </div>
+        ))}
+      </div>
       <div className=" w-full grid grid-cols-2 gap-6 mt-6 ">
         <div className=" w-full bg-[#F5F5F5] p-4 rounded-[15px] min-h-[180px]">
           {/* Conditionally render based on whether the coordinatesList is empty or not */}

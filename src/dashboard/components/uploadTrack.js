@@ -115,7 +115,7 @@ const UploadTrack = ({ setTrackingStep }) => {
             )}
 
             {uploadComplete && (
-              <video className=" rounded-[10px] w-full mt-4" controls>
+              <video className=" rounded-[10px] w-full mt-4" controls muted>
                 <source src={inputAna} />
                 {/* <source src={selectedVideo.src} /> */}
                 Your browser does not support the video tag.
