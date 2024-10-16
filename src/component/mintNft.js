@@ -1,0 +1,42 @@
+import axios from "axios";
+
+// API key for authentication (replace with your actual key)
+const API_KEY = "your-underdog-api-key";
+
+// Project ID from Underdog (this is the project under which the NFT is minted)
+const PROJECT_ID = "your-project-id";
+
+// Endpoint URL for minting NFT
+const MINT_NFT_URL = `https://api.underdogprotocol.com/v2/projects/${PROJECT_ID}/nfts`;
+
+// Function to mint NFT
+async function mintNFT(recipientAddress, metadataUrl) {
+  try {
+    const response = await axios.post(
+      MINT_NFT_URL,
+      {
+        metadata: metadataUrl, // URL pointing to your NFT metadata (hosted on IPFS or other server)
+        walletAddress: recipientAddress, // Recipient wallet address for the NFT
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("NFT minted successfully:", response.data);
+  } catch (error) {
+    console.error(
+      "Error minting NFT:",
+      error.response ? error.response.data : error.message
+    );
+  }
+}
+
+// Example usage:
+const recipientWallet = "recipient-wallet-address"; // Wallet address where the NFT will be sent
+const metadataUrl = "https://ipfs.io/ipfs/your-ipfs-hash"; // URL where NFT metadata is stored
+
+mintNFT(recipientWallet, metadataUrl);
