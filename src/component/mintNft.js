@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // API key for authentication (replace with your actual key)
-const API_KEY = "your-underdog-api-key";
+const API_KEY = process.env.REACT_APP_UNDERDOG_API_KEY;
 
 // Project ID from Underdog (this is the project under which the NFT is minted)
 const PROJECT_ID = "your-project-id";
