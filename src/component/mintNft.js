@@ -4,7 +4,7 @@ import axios from "axios";
 const API_KEY = process.env.REACT_APP_UNDERDOG_API_KEY;
 
 // Project ID from Underdog (this is the project under which the NFT is minted)
-const PROJECT_ID =process.env.REACT_APP_PROJECT_ID;
+const PROJECT_ID = process.env.REACT_APP_PROJECT_ID;
 
 // Endpoint URL for minting NFT
 const MINT_NFT_URL = `https://api.underdogprotocol.com/v2/projects/${PROJECT_ID}/nfts`;
@@ -37,6 +37,6 @@ async function mintNFT(recipientAddress, metadataUrl) {
 
 // Example usage:
 const recipientWallet = "recipient-wallet-address"; // Wallet address where the NFT will be sent
-const metadataUrl = "https://ipfs.io/ipfs/your-ipfs-hash"; // URL where NFT metadata is stored
+const metadataUrl = "https://ipfs.io/ipfs/your-ipfs-hash"; // URL where NFT metadata is stor   ed
 
 mintNFT(recipientWallet, metadataUrl);
