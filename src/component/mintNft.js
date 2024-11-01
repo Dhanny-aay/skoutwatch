@@ -26,7 +26,7 @@ async function mintNFT(recipientAddress, metadataUrl) {
       }
     );
 
-    console.log("NFT minted successfully:", response.data);
+    console.log("NFT minted:", response.data);
   } catch (error) {
     console.error(
       "Error minting NFT:",
