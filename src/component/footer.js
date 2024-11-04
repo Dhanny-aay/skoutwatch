@@ -34,6 +34,7 @@ const Footer = () => {
       <div className="w-full py-16 px-4 md:px-14 lg:px-24">
         <div className=" pb-8 flex flex-col md:flex-row space-y-8 md:space-y-0 items-center justify-between w-full border-b border-[#EAEBF0]">
           <img src={logo} alt="" />
+
           {/* <div className=" flex items-center space-x-10">
             <Link
               to="/"
