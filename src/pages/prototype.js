@@ -7,7 +7,7 @@ import load from "./assets/blackload.gif";
 const Prototype = () => {
   const [videoSrc, setVideoSrc] = useState(null);
   const [videoThumbnail, setVideoThumbnail] = useState(null);
-  const [segmentationResponse, setSegmentationResponse] = useState(null); // SAM-2 API response
+  const [segmentationResponse, setSegmentationResponse] = useState(null); // SAM-2 API data response
   const [getRequestData, setGetRequestData] = useState(null); // Store the GET request response
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const UNDERDOG_BASE_URL = process.env.REACT_APP_UNDERDOG_BASE_URL;
