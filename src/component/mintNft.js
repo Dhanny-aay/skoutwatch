@@ -6,9 +6,6 @@ const API_KEY = process.env.REACT_APP_UNDERDOG_API_KEY;
 // Project ID from Underdog (this is the project under which the NFT is minted)
 const PROJECT_ID = process.env.REACT_APP_PROJECT_ID;
 
-
-
-
 // Endpoint URL for minting NFT
 const MINT_NFT_URL = `https://api.underdogprotocol.com/v2/projects/${PROJECT_ID}/nfts`;
 
