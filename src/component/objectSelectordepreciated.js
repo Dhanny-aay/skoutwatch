@@ -26,7 +26,7 @@ const ObjectSelector = ({
         body: JSON.stringify({
           input: {
             mask_type: "greenscreen",
-            video_fps: 25,
+            video_fps: 50,
             input_video: videoSrc,
             click_frames: "1",
             click_labels: "1",
